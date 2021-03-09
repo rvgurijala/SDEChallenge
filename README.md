@@ -26,12 +26,12 @@ We need to provide Google Analytic like services to our customers. Please provid
 
 ## Coding Question Documentation
 
-# Interface IMovingAverage
+### Interface IMovingAverage
 
 It represents the moving average. It has 5 methods addValue, getAverage, reset, getAllElements and getElement. Generic type
 allows you to decide the data type while implementing.
 
-# class MovingAverageImpl
+### class MovingAverageImpl
 
 It implements the interface IMovingAverage and provides main logic. I am using ArrayList for storing the elements and I am not
 removing elements even after reaching the window size. It maybe useful later. However, it may cause to out of memory exception
@@ -46,14 +46,14 @@ If elements size is greater than window size, I will use window size for dividin
 
 It is not thread safe.
 
-# class SynchronizedMovingAverageImpl
+### class SynchronizedMovingAverageImpl
 
 It works like MovingAverageImpl but all methods are synchronized.
 
 It is thread safe
 
 
-# Design document 
+### Design document 
 
 Please have a look at [`DESIGN.md`](DESIGN.md) for the analytics design.
 

@@ -1,54 +1,54 @@
-## Paytm Analytics Design
+### Paytm Analytics Design
 We have tracking ids in websites and that will be sent along with customer and web page information to Paytm servers when users perform the actions.
 We use that data for analysis and reports.
 
 Please have a look at architecture diagram [`paytm_analytics.png`](paytm_analytics.png)
 
-# Browsers/Mobile Apps
+### Browsers/Mobile Apps
 Analytics APIs will be triggered from here and when users perform actions. Paytm analytics get billions of API hits every day.
 
-# Load Balancer 1
+### Load Balancer 1
 It is the first point of contact to the analytics system and it routes the traffic among multiple API gateway instances.
 There are many powerful load balancers are there in the market such as Amazon ELB, HAProxy ect.
 
-# API Gateways 2
+### API Gateways 2
 It will receive hits from load balancer and perform many operations such as authenticating, rate limiting and traffic routing to among
 microservice instances.
 
-# Spring Boot MicroServices 1
+### Spring Boot MicroServices 1
 These servers take requests from API gateways and store data into MongoDBs. As well as these services has logic to produce different kafka events
 and send those to kafka clusters.
 
-# MongoDBs
+### MongoDBs
 It will maintain raw data which we get from customer websites. Data Model is not structural that's why NoSQL DB is good for
 storing the data. And also, these are highly scalable, we can store TBs of data. We can move this data to historical data warehouses when data becomes old.
 
-# Apache Kafka
+### Apache Kafka
 It is one of powerful open source messaging brokers and it can persist the event for a long time also. It is highly scalable and reliable.
 We can maintain multiple data replicas.
 
-# Apache Spark
+### Apache Spark
 It is very famous for processing the data streams. It is too fast because it does process the data in-memory.
 It generates time series data and stores it into Cassandra.
 
-# Apache Cassandra
+### Apache Cassandra
 It is a very powerful database to store huge volumes of data and it is very scalable.
 It is good store time series data in Cassandra. We can move old data to the data warehouse.
 
-# Spring Boot MicroServices 2
+### Spring Boot MicroServices 2
 It will query the Cassandra database and load the queried data to Redis for fast access for the same query next time.
 
-# Redis cache
+### Redis cache
 It will maintain frequently using data so microservies won't go to the database for fetching the data. It decreases many query calls.
 
-# Load Balancer 1
+### Load Balancer 1
 It will receive requests from the analytics dashboard and route traffic to API Gateways 2.
 
-# API Gateways 2
+### API Gateways 2
 It will receive hits from load balancer and perform operations such as authenticating, rate limiting and traffic routing to among
 microservice2 instances.
 
-# Analytics Dashboard
+### Analytics Dashboard
 It will represent data in graphically for end users.
 We can use ReactJs javascript framework in the front end.
 
